@@ -12,4 +12,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggleButton(navBurger: any, navMenu: any){
+    console.log(navBurger);
+    navBurger.classList.toggle('is-active');
+    navMenu.classList.toggle('is-active');
+  }
 }
