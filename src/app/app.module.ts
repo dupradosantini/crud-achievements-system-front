@@ -12,7 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { HomeComponent } from './components/views/home/home.component';
-
+import { GamesReadComponent } from './components/views/games/games-read/games-read.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HomeComponent } from './components/views/home/home.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    GamesReadComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { HomeComponent } from './components/views/home/home.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

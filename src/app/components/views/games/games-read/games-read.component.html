@@ -1,0 +1,20 @@
+<div class="hero is-fullheight is-dark has-background">
+  <img src="/assets/img/home-bg.jpg" alt="" class="hero-background is-transparent">
+   <div class="hero-body">
+     <div class="container has-text-centered">
+       <h1 class="title"> Games Page </h1>
+       <!--  CARD  -->
+       <section class="boxes">
+        <div class="container">
+          <div class="box" *ngFor="let game of gameVet; let i = index;">
+            <h2><i class="fas fa-arrows-alt-v"></i> {{i}}: {{game.name}}</h2>
+            <p>
+              {{game.description}}
+            </p>
+          </div>
+        </div>
+      </section>
+       <!-- CARD   -->
+     </div>
+   </div>
+ </div>
