@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from '../game.service';
+import { Game } from '../games.model';
 
-interface Game{
-  id: number,
-  name: string,
-  description: string,
-  cover_image: string
-}
+const DEFAULT_PAGE_NUMBER = 0;
+const DEFAULT_PAGE_SIZE = 2;
 
 @Component({
   selector: 'app-games-read',
@@ -14,37 +12,59 @@ interface Game{
 })
 export class GamesReadComponent implements OnInit {
 
-  gameVet:Game[] = [
-    {
-      id: 1,
-      name: "Game 1",
-      description: "Description 1",
-      cover_image: "imgurl 1"
-    },
-    {
-      id: 2,
-      name: "Game 2",
-      description: "Description 2",
-      cover_image: "imgurl 2"
-    },
-    {
-      id: 3,
-      name: "Game 3",
-      description: "Description 3",
-      cover_image: "imgurl 3"
-    },
-    {
-      id: 4,
-      name: "Game 4",
-      description: "Description 4",
-      cover_image: "imgurl 4"
-    }
+  gameVet: Game[]=[];
+  gamePage: any;
+  pageNumber:Number;
+  numberOfElements:Number;
+  totalPages:Number;
 
-  ];
-
-  constructor() { }
+  constructor(private service: GameService) {
+    this.pageNumber=DEFAULT_PAGE_NUMBER;
+    this.numberOfElements=DEFAULT_PAGE_SIZE;
+    this.totalPages=0;
+   }
 
   ngOnInit(): void {
-    console.log(this.gameVet);
+    this.getGamePage();
+  }
+
+
+  getGamePage(){
+    this.service.findGamePage(this.pageNumber, this.numberOfElements).subscribe(resposta => {
+      this.gamePage = resposta;
+      const tamanho = this.gamePage.content.length;
+      this.totalPages = resposta.totalPages;
+      this.gameVet.length = 0;
+      for(let i=0;i<tamanho;i++){
+        this.gameVet[i] = this.gamePage.content[i];
+      }
+    })
+  }
+
+  counter(i: Number): Array<Number>{
+    return new Array(i);
+  }
+
+  goToPage(p: Number){
+    this.pageNumber = p;
+    this.getGamePage();
+  }
+
+  goToNext(){
+    if(this.pageNumber == (this.totalPages.valueOf() - 1)){
+      this.goToPage(this.pageNumber.valueOf());
+    }else{
+      this.pageNumber = this.pageNumber.valueOf() + 1;
+      this.goToPage(this.pageNumber.valueOf());
+    }
+  }
+
+  goToPrevious(){
+    if(this.pageNumber == 0){
+      this.goToPage(this.pageNumber.valueOf());
+    }else{
+      this.pageNumber = this.pageNumber.valueOf() - 1;
+      this.goToPage(this.pageNumber.valueOf());
+    }
   }
 }

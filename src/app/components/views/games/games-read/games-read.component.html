@@ -2,19 +2,44 @@
   <img src="/assets/img/home-bg.jpg" alt="" class="hero-background is-transparent">
    <div class="hero-body">
      <div class="container has-text-centered">
-       <h1 class="title"> Games Page </h1>
+       <h1 class="title"> Available Games </h1>
        <!--  CARD  -->
-       <section class="boxes">
+      <section class="boxes"*ngIf="gameVet.length > 0">
         <div class="container">
           <div class="box" *ngFor="let game of gameVet; let i = index;">
-            <h2><i class="fas fa-arrows-alt-v"></i> {{i}}: {{game.name}}</h2>
+            <div class="card-image" *ngIf="game != null">
+              <figure class="image is-16by9">
+                <img [src]="game.cover_image" alt="https://bulma.io/images/placeholders/1280x960.png">
+              </figure>
+            </div>
+            <h2><i class="fas fa-arrows-alt-v"></i>{{game.name}}</h2>
             <p>
-              {{game.description}}
+              {{game.genre}}
             </p>
           </div>
         </div>
       </section>
        <!-- CARD   -->
+       <section *ngIf="gameVet.length <= 0">
+        <h3> Oops... seems like we are out of games.</h3>
+      </section>
+      <!-- PAGINATION ELEMENT -->
+      <nav class="pagination is-large" role="navigation" aria-label="pagination">
+        <a class="pagination-previous"(click)="goToPrevious()">Previous</a>
+        <a class="pagination-next"(click)="goToNext()">Next page</a>
+        <ul class="pagination-list">
+          <li *ngFor="let page of counter(totalPages); let i = index;" >
+            <a class="pagination-link"
+                aria-label="Goto page"
+                (click)="goToPage(i)"
+                *ngIf="pageNumber != i">{{i+1}}</a>
+            <a class="pagination-link is-current"
+                aria-label="Page active" aria-current="page"
+                *ngIf="pageNumber == i">{{i+1}}</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- PAGINATION ELEMENT -->
      </div>
    </div>
  </div>
