@@ -16,6 +16,14 @@
             <p>
               {{game.genre}}
             </p>
+            <div class="buttons">
+              <button class="button is-dark" (click)="getGameById(game.id, achievModal)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+              <button class="button is-dark">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -43,3 +51,37 @@
      </div>
    </div>
  </div>
+
+
+ <!-- MODAL TO SHOWCASE ACHIEVEMENTS-->
+ <div class="modal is-dark" #achievModal>
+  <div class="modal-background is-dark"></div>
+  <div class="modal-card is-dark">
+    <header class="modal-card-head is-dark">
+      <p class="modal-card-title">Available Achievements</p>
+      <button class="delete" aria-label="close" (click)="toggleModal(achievModal)"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+      <section class="boxes"*ngIf="achievVet.length > 0">
+        <div class="container">
+          <div class="box" *ngFor="let achievement of achievVet; let i = index;">
+            <div class="card-image" *ngIf="achievement != null">
+              <figure class="image is-4by4">
+                <img [src]="achievement.picture" alt="https://bulma.io/images/placeholders/1280x960.png">
+              </figure>
+            </div>
+            <h2><i class="fas fa-arrows-alt-v"></i> {{achievement.name}} </h2>
+            <p>
+              {{achievement.description}}
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success">Add Achievement</button>
+    </footer>
+  </div>
+</div>
+ <!-- MODAL TO SHOWCASE ACHIEVEMENTS-->

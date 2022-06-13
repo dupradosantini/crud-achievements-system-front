@@ -1,6 +1,7 @@
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
-import { Game } from '../games.model';
+import { Achievement, Game } from '../games.model';
 
 const DEFAULT_PAGE_NUMBER = 0;
 const DEFAULT_PAGE_SIZE = 2;
@@ -17,6 +18,8 @@ export class GamesReadComponent implements OnInit {
   pageNumber:Number;
   numberOfElements:Number;
   totalPages:Number;
+  selectedGame: any;
+  achievVet: Achievement[]=[];
 
   constructor(private service: GameService) {
     this.pageNumber=DEFAULT_PAGE_NUMBER;
@@ -30,7 +33,8 @@ export class GamesReadComponent implements OnInit {
 
 
   getGamePage(){
-    this.service.findGamePage(this.pageNumber, this.numberOfElements).subscribe(resposta => {
+    this.service.findGamePage(this.pageNumber, this.numberOfElements)
+    .subscribe(resposta => {
       this.gamePage = resposta;
       const tamanho = this.gamePage.content.length;
       this.totalPages = resposta.totalPages;
@@ -66,5 +70,21 @@ export class GamesReadComponent implements OnInit {
       this.pageNumber = this.pageNumber.valueOf() - 1;
       this.goToPage(this.pageNumber.valueOf());
     }
+  }
+
+  getGameById(id: Number, modal: any){
+    this.service.findGameById(id)
+    .subscribe(response =>{
+      this.selectedGame = response;
+      this.achievVet = this.selectedGame.achievements;
+      console.log(this.selectedGame);
+      console.log(this.achievVet);
+      this.toggleModal(modal);
+    })
+  }
+
+
+  toggleModal(modal: any){
+    modal.classList.toggle('is-active');
   }
 }

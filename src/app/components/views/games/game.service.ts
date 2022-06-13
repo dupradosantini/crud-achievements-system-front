@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Game, GamePage } from './games.model';
+import { Achievement, Game, GamePage } from './games.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +17,15 @@ export class GameService {
   findGamePage(pageNumber:Number, numberOfElements:Number):Observable<GamePage>{
     const url = `${this.baseUrl}/games?page=${pageNumber}&size=${numberOfElements}`; /*?page=0&size=3 to page*/
     return this.http.get<GamePage>(url);
+  }
+
+  findGameById(id: Number):Observable<Game>{
+    const url = `${this.baseUrl}/games/${id}`;
+    return this.http.get<Game>(url);
+  }
+
+  findAchivementsByGame(id: Number): Observable<Achievement[]>{
+    const url = `${this.baseUrl}/games/${id}/achievements`;
+    return this.http.get<Achievement[]>(url);
   }
 }

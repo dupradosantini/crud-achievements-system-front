@@ -10,6 +10,25 @@
     height: 100%
     &.is-transparent
       opacity: 0.3
+  .hero-body
+    .boxes
+      .container
+        display: flex
+        align-items: center
+        justify-content: space-evenly
+        .box
+          flex: 1
+          background: hsl(0, 0%, 21%)
+          color: #fff
+          border-radius: 10px
+          margin: 20px 10px
+          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6)
+          padding: 5px 1px
+          max-height: 48%
+          max-width: 48%
+          i
+            margin-right: 10px
+
 
 .title
   padding: 30px
@@ -20,27 +39,34 @@
   font-size: 30px
 
 /* FLEX STUFF */
-.boxes
-  .container
-    display: flex
-    align-items: center
-    justify-content: space-evenly
+
+.modal
+  .modal-card
+    width: 80%
+    height: 90%
+    .modal-card-head
+      background-color: hsl(0, 0%, 21%)
+      .modal-card-title
+        color: white
+    .modal-card-body
+      background-color: hsl(0, 0%, 12%)
+      .boxes
+        .container
+          display: flex
+          .box
+            background-color: hsl(0, 0%, 21%)
+            color: #fff
+            border-radius: 10px
+            margin: 20px 10px
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6)
+            align-items: center
+            .card-image
+              padding: 10px
+    .modal-card-foot
+      background-color: hsl(0, 0%, 21%)
+      .button
+        background-color: #485FC7
 
 
-.box
-  flex: 1
-  background: hsl(0, 0%, 21%)
-  color: #fff
-  border-radius: 10px
-  margin: 20px 10px
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6)
-  padding: 5px 1px
-  max-height: 60%
-  max-width: 60%
-
-
-.box
-  i
-    margin-right: 10px
 
 
