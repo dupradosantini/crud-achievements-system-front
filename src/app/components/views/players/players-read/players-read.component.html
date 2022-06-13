@@ -1,0 +1,52 @@
+<div class="hero is-fullheight is-dark has-background">
+  <img src="/assets/img/home-bg.jpg" alt="" class="hero-background is-transparent">
+   <div class="hero-body">
+     <div class="container has-text-centered">
+       <h1 class="title"> Player Listing </h1>
+       <!--  CARD  -->
+        <section class="boxes"*ngIf="">
+          <div class="container">
+            <div class="box" *ngFor="">
+              <div class="card-image" *ngIf="">
+                <figure class="image is-4by3">
+                  <img [src]="" alt="https://bulma.io/images/placeholders/1280x960.png">
+                </figure>
+              </div>
+              <h2><i class="fas fa-arrows-alt-v"></i> Name</h2>
+              <p>
+                Email
+              </p>
+              <div class="buttons">
+                <button class="button is-dark">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </button>
+                <button class="button is-dark">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+       <!-- CARD   -->
+        <section *ngIf="1">
+          <h3> Oops... seems like there are no players.</h3>
+        </section>
+        <!-- PAGINATION ELEMENT -->
+        <nav class="pagination is-large" role="navigation" aria-label="pagination">
+          <a class="pagination-previous">Previous</a>
+          <a class="pagination-next">Next page</a>
+          <ul class="pagination-list">
+            <li *ngFor="" >
+              <a class="pagination-link"
+                  aria-label="Goto page"
+                  *ngIf="">i+1</a>
+              <a class="pagination-link is-current"
+                  aria-label="Page active" aria-current="page"
+                  *ngIf="">i+1</a>
+            </li>
+          </ul>
+        </nav>
+      <!-- PAGINATION ELEMENT -->
+      </div>
+   </div>
+</div>

@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { HomeComponent } from './components/views/home/home.component';
 import { GamesReadComponent } from './components/views/games/games-read/games-read.component';
 import { MatCardModule } from '@angular/material/card';
+import { PlayersReadComponent } from './components/views/players/players-read/players-read.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatCardModule } from '@angular/material/card';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    GamesReadComponent
+    GamesReadComponent,
+    PlayersReadComponent
   ],
   imports: [
     BrowserModule,
