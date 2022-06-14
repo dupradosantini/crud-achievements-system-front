@@ -4,7 +4,7 @@ import { Player } from '../players.model';
 
 
 const DEFAULT_PAGE_NUMBER = 0;
-const DEFAULT_PAGE_SIZE = 2;
+const DEFAULT_PAGE_SIZE = 5;
 
 @Component({
   selector: 'app-players-read',
