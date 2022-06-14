@@ -1,5 +1,5 @@
-export interface GamePage{
-  content: Game[];
+export interface PlayerPage{
+  content: Player[];
   pageable: {
     sort: {
       empty: Boolean,

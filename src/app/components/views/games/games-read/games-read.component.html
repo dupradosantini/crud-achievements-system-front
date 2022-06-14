@@ -67,7 +67,7 @@
         <div class="container">
           <div class="box" *ngFor="let achievement of achievVet; let i = index;">
             <div class="card-image" *ngIf="achievement != null">
-              <figure class="image is-4by4">
+              <figure class="image is16by9">
                 <img [src]="achievement.picture" alt="https://bulma.io/images/placeholders/1280x960.png">
               </figure>
             </div>
@@ -78,6 +78,7 @@
           </div>
         </div>
       </section>
+      <h1 *ngIf="achievVet.length <= 0">No achievements available.</h1>
     </section>
     <footer class="modal-card-foot">
       <button class="button is-success">Add Achievement</button>

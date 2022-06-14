@@ -12,22 +12,39 @@
       opacity: 0.3
   .hero-body
     .boxes
+      align-items: center
       .container
         display: flex
         align-items: center
         justify-content: space-evenly
+        flex-direction: column
         .box
-          flex: 1
+          display: flex
           background: hsl(0, 0%, 21%)
           color: #fff
           border-radius: 10px
           margin: 20px 10px
           box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6)
           padding: 5px 1px
-          max-height: 48%
-          max-width: 48%
+          max-height: 80%
+          max-width: 80%
+          align-items: center
+          justify-content: center
           i
             margin-right: 10px
+          .card-image
+            width: 30%
+            flex: 1
+            border: 2px solid yellow
+            padding: 1rem
+            .image
+              //margin-top: 8px
+              max-height: 100px
+              max-width: 100px
+          .player-text
+            margin-top: 10px
+            margin-right: 20px
+            border: 2px solid green
 
 
 .title

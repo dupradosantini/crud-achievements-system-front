@@ -4,18 +4,18 @@
      <div class="container has-text-centered">
        <h1 class="title"> Player Listing </h1>
        <!--  CARD  -->
-        <section class="boxes"*ngIf="">
+        <section class="boxes"*ngIf="playerArray.length > 0">
           <div class="container">
-            <div class="box" *ngFor="">
-              <div class="card-image" *ngIf="">
-                <figure class="image is-4by3">
-                  <img [src]="" alt="https://bulma.io/images/placeholders/1280x960.png">
+            <div class="box" *ngFor="let player of playerArray; let i = index;">
+              <div class="card-image" *ngIf="player != null">
+                <figure class="image">
+                  <img [src]="player.profilePic" alt="https://bulma.io/images/placeholders/1280x960.png">
                 </figure>
               </div>
-              <h2><i class="fas fa-arrows-alt-v"></i> Name</h2>
-              <p>
-                Email
-              </p>
+              <div class="player-text">
+                <h2><i class="fas fa-arrows-alt-v"></i>{{player.name}}</h2>
+                <p> {{player.email}} </p>
+              </div>
               <div class="buttons">
                 <button class="button is-dark">
                   <mat-icon>remove_red_eye</mat-icon>
@@ -28,7 +28,7 @@
           </div>
         </section>
        <!-- CARD   -->
-        <section *ngIf="1">
+        <section *ngIf="playerArray.length <=0">
           <h3> Oops... seems like there are no players.</h3>
         </section>
         <!-- PAGINATION ELEMENT -->
