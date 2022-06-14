@@ -16,6 +16,14 @@
                 <h2><i class="fas fa-arrows-alt-v"></i>{{player.name}}</h2>
                 <p> {{player.email}} </p>
               </div>
+              <div class="unlock-text" *ngIf="player.unlockedAchievements.length != 0">
+                Some unlocks:
+              </div>
+              <div class="card-image" *ngFor="let achievement of player.unlockedAchievements | slice:0:4; let i = index;">
+                <figure class="achiev-image">
+                  <img [src]="achievement.picture" alt="https://bulma.io/images/placeholders/1280x960.png">
+                </figure>
+              </div>
               <div class="buttons">
                 <button class="button is-dark">
                   <mat-icon>remove_red_eye</mat-icon>
