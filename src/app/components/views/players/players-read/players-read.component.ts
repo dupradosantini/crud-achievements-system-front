@@ -39,16 +39,12 @@ export class PlayersReadComponent implements OnInit {
       this.playerPage = response;
       this.playerArray = this.playerPage.content;
       this.totalPages = response.totalPages;
-      console.log("Page: ", response)
-      console.log(this.playerArray);
     })
   }
 
   getRandomAchievements(achivements: Achievement[]): Achievement[]{
     let newAchievArray:Achievement[] = [];
-    //console.log("Achiev Length " + achivements.length);
     if(achivements.length > 0){
-      //console.log(achivements.length);
       const numbers = [];
       const slice = 4;
       let n,p;
