@@ -1,10 +1,13 @@
+
 <div class="hero is-fullheight is-dark has-background">
   <img src="/assets/img/player-bg.jpg" alt="" class="hero-background is-transparent">
    <div class="hero-body">
      <div class="container has-text-centered">
        <h1 class="title"> Player Listing </h1>
        <!--  CARD  -->
-        <section class="boxes"*ngIf="playerArray.length > 0">
+        <section class="boxes"*ngIf="playerArray.length > 0"
+            infinite-scroll
+            (scrolled)="onScrollDown($event)">
           <div class="container">
             <div class="box" *ngFor="let player of playerArray; let i = index;">
               <div class="card-image" *ngIf="player != null">
@@ -39,23 +42,6 @@
         <section *ngIf="playerArray.length <=0">
           <h3> Oops... seems like there are no players.</h3>
         </section>
-        <!-- PAGINATION ELEMENT -->
-        <nav class="pagination is-large" role="navigation" aria-label="pagination">
-          <a class="pagination-previous" (click)="goToPrevious()" *ngIf="this.totalPages != 1">Previous</a>
-          <a class="pagination-next" (click)="goToNext()" *ngIf="this.totalPages != 1">Next page</a>
-          <ul class="pagination-list">
-            <li *ngFor="let page of counter(totalPages); let i = index;" >
-              <a class="pagination-link"
-                  aria-label="Goto page"
-                  (click)="goToPage(i)"
-                  *ngIf="pageNumber != i">{{i+1}}</a>
-              <a class="pagination-link is-current"
-                  aria-label="Page active" aria-current="page"
-                  *ngIf="pageNumber == i && this.totalPages != 1">{{i+1}}</a>
-            </li>
-          </ul>
-        </nav>
-      <!-- PAGINATION ELEMENT -->
       </div>
    </div>
 </div>

@@ -1,10 +1,11 @@
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../player.service';
-import { Achievement, Player } from '../players.model';
+import { Achievement, Player, PlayerPage } from '../players.model';
 
 
 const DEFAULT_PAGE_NUMBER = 0;
-const DEFAULT_PAGE_SIZE = 5;
+const DEFAULT_PAGE_SIZE = 1;
 
 @Component({
   selector: 'app-players-read',
@@ -18,14 +19,17 @@ export class PlayersReadComponent implements OnInit {
   pageNumber: Number;
   numberOfElements: Number;
   totalPages:Number;
+  lastScrollPosition: number;
 
   constructor(private service: PlayerService) {
     this.pageNumber=DEFAULT_PAGE_NUMBER;
     this.numberOfElements=DEFAULT_PAGE_SIZE;
     this.totalPages=0;
+    this.lastScrollPosition=0;
   }
 
   ngOnInit(): void {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     this.getPlayerPage();
   }
 
@@ -35,13 +39,14 @@ export class PlayersReadComponent implements OnInit {
       this.playerPage = response;
       this.playerArray = this.playerPage.content;
       this.totalPages = response.totalPages;
+      console.log("Page: ", response)
       console.log(this.playerArray);
     })
   }
 
   getRandomAchievements(achivements: Achievement[]): Achievement[]{
     let newAchievArray:Achievement[] = [];
-    console.log("Achiev Length " + achivements.length);
+    //console.log("Achiev Length " + achivements.length);
     if(achivements.length > 0){
       //console.log(achivements.length);
       const numbers = [];
@@ -63,31 +68,42 @@ export class PlayersReadComponent implements OnInit {
     }
   }
 
-  /* PAGING METHODS */
-  counter(i: Number): Array<Number>{
-    return new Array(i);
+  /* INFINITE SCROLLING */
+  onScrollDown(ev: any){
+    const limit = Math.max( document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight); //Gets the ''bottom'' of the scroll value
+
+    if(this.lastScrollPosition< ev.currentScrollPosition){
+      this.numberOfElements = this.numberOfElements.valueOf() + 1;
+      this.getMoreElements();
+      if(ev.currentScrollPosition === limit){
+        this.getLastPlayer();
+      }
+    }
   }
 
-  goToPage(p: Number){
-    this.pageNumber = p;
-    this.getPlayerPage();
-  }
-
-  goToNext(){
-    if(this.pageNumber == (this.totalPages.valueOf() - 1)){
-      this.goToPage(this.pageNumber.valueOf());
-    }else{
+  getMoreElements(){
+    if(this.pageNumber != this.totalPages){
       this.pageNumber = this.pageNumber.valueOf() + 1;
-      this.goToPage(this.pageNumber.valueOf());
+      this.service.findPlayerPage(this.pageNumber, DEFAULT_PAGE_SIZE)
+      .subscribe({
+        next: (response) => {
+          this.playerPage = response;
+          for(let i = 0; i<this.playerPage.content.length; i++){
+            this.playerArray.push(this.playerPage.content[i]);
+          }
+        }
+      })
     }
   }
 
-  goToPrevious(){
-    if(this.pageNumber == 0){
-      this.goToPage(this.pageNumber.valueOf());
-    }else{
-      this.pageNumber = this.pageNumber.valueOf() - 1;
-      this.goToPage(this.pageNumber.valueOf());
-    }
+  async getLastPlayer(){
+    setTimeout(() => { //Reminder : this gets executed after the 300 ms delay.
+        this.numberOfElements = DEFAULT_PAGE_SIZE * this.totalPages.valueOf();
+        this.getMoreElements();
+    }, 300);
   }
 }

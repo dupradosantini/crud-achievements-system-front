@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "bulma": "^0.9.4",
+    "ngx-infinite-scroll": "^13.0.2",
     "node": "^17.7.2",
     "node-sass": "^7.0.1",
     "rxjs": "~7.5.0",

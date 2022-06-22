@@ -11,12 +11,14 @@ import { FooterComponent } from './components/template/footer/footer.component';
 //Angular Material Imports
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/views/home/home.component';
 import { GamesReadComponent } from './components/views/games/games-read/games-read.component';
 import { MatCardModule } from '@angular/material/card';
 import { PlayersReadComponent } from './components/views/players/players-read/players-read.component';
 
+//Infinite Scroll
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { PlayersReadComponent } from './components/views/players/players-read/pl
     MatSidenavModule,
     MatIconModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
