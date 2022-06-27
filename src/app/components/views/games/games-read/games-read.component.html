@@ -20,7 +20,7 @@
               <button class="button is-dark" (click)="getGameById(game.id, achievModal)">
                 <mat-icon>remove_red_eye</mat-icon>
               </button>
-              <button class="button is-dark">
+              <button class="button is-dark" (click)="goToAchievs('/games/{{game.id}}/achievements')">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>

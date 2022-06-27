@@ -19,6 +19,7 @@ import { PlayersReadComponent } from './components/views/players/players-read/pl
 
 //Infinite Scroll
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { GamesAchievementsComponent } from './components/views/games/games-achievements/games-achievements.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FooterComponent,
     HomeComponent,
     GamesReadComponent,
-    PlayersReadComponent
+    PlayersReadComponent,
+    GamesAchievementsComponent
   ],
   imports: [
     BrowserModule,

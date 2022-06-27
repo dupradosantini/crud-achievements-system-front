@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { Achievement, Game } from '../games.model';
+import { Router } from '@angular/router';
 
 const DEFAULT_PAGE_NUMBER = 0;
 const DEFAULT_PAGE_SIZE = 2;
@@ -20,7 +21,7 @@ export class GamesReadComponent implements OnInit {
   selectedGame: any;
   achievVet: Achievement[]=[];
 
-  constructor(private service: GameService) {
+  constructor(private service: GameService, private router: Router) {
     this.pageNumber=DEFAULT_PAGE_NUMBER;
     this.numberOfElements=DEFAULT_PAGE_SIZE;
     this.totalPages=0;
@@ -85,5 +86,9 @@ export class GamesReadComponent implements OnInit {
 
   toggleModal(modal: any){
     modal.classList.toggle('is-active');
+  }
+
+  goToAchievs(pageName: string){
+    this.router.navigate([`${pageName}`]);
   }
 }
