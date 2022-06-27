@@ -17,10 +17,10 @@
               {{game.genre}}
             </p>
             <div class="buttons">
-              <button class="button is-dark" (click)="getGameById(game.id, achievModal)">
+              <button class="button is-dark" (click)="goToAchievs(game.id)">
                 <mat-icon>remove_red_eye</mat-icon>
               </button>
-              <button class="button is-dark" (click)="goToAchievs('/games/{{game.id}}/achievements')">
+              <button class="button is-dark" (click)="getGameById(game.id, achievModal)">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>

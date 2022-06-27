@@ -88,7 +88,8 @@ export class GamesReadComponent implements OnInit {
     modal.classList.toggle('is-active');
   }
 
-  goToAchievs(pageName: string){
+  goToAchievs(id: Number){
+    const pageName = `games/${id}/achievements`;
     this.router.navigate([`${pageName}`]);
   }
 }
