@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
-import { Achievement, Game } from '../games.model';
+import { Game, GameUpdateObj } from '../games.model';
 import { Router } from '@angular/router';
 
 const DEFAULT_PAGE_NUMBER = 0;
@@ -19,7 +19,6 @@ export class GamesReadComponent implements OnInit {
   numberOfElements:Number;
   totalPages:Number;
   selectedGame: any;
-  achievVet: Achievement[]=[];
 
   constructor(private service: GameService, private router: Router) {
     this.pageNumber=DEFAULT_PAGE_NUMBER;
@@ -72,14 +71,37 @@ export class GamesReadComponent implements OnInit {
     }
   }
 
-  getGameById(id: Number, modal: any){
+  editGame(id: Number, modal: any, nameInput: any, genreInput: any, coverImgInput: any){
     this.service.findGameById(id)
     .subscribe(response =>{
       this.selectedGame = response;
-      this.achievVet = this.selectedGame.achievements;
-      console.log(this.selectedGame);
-      console.log(this.achievVet);
+      nameInput.value = this.selectedGame.name;
+      genreInput.value = this.selectedGame.genre;
+      coverImgInput.value = this.selectedGame.cover_image;
       this.toggleModal(modal);
+    })
+  }
+
+  formSubmit(gameName: string, gameGenre: string, gameImg: string, modal: any){
+    const placeholderGame: GameUpdateObj = {
+      id: this.selectedGame.id,
+      name: gameName,
+      genre: gameGenre,
+      cover_image: gameImg
+    }
+    console.log(placeholderGame);
+    this.service.updateGame(placeholderGame)
+    .subscribe({
+      next: (response) => {
+        this.toggleModal(modal);
+        this.getGamePage();
+        console.log('Game Updated!');
+        console.log(response);
+      },
+      error: () => {
+        this.toggleModal(modal);
+        console.log("Error updating")
+      }
     })
   }
 

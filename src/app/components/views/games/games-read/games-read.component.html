@@ -20,7 +20,7 @@
               <button class="button is-dark" (click)="goToAchievs(game.id)">
                 <mat-icon>remove_red_eye</mat-icon>
               </button>
-              <button class="button is-dark" (click)="getGameById(game.id, achievModal)">
+              <button class="button is-dark" (click)="editGame(game.id, editModal,gameName,gameGenre,gameImg)">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
@@ -54,34 +54,42 @@
 
 
  <!-- MODAL TO SHOWCASE ACHIEVEMENTS-->
- <div class="modal is-dark" #achievModal>
+ <div class="modal is-dark" #editModal>
   <div class="modal-background is-dark"></div>
   <div class="modal-card is-dark">
     <header class="modal-card-head is-dark">
-      <p class="modal-card-title">Available Achievements</p>
-      <button class="delete" aria-label="close" (click)="toggleModal(achievModal)"></button>
+      <p class="modal-card-title">Edit Game</p>
+      <button class="delete" aria-label="close" (click)="toggleModal(editModal)"></button>
     </header>
     <section class="modal-card-body">
       <!-- Content ... -->
-      <section class="boxes"*ngIf="achievVet.length > 0">
-        <div class="container">
-          <div class="box" *ngFor="let achievement of achievVet; let i = index;">
-            <div class="card-image" *ngIf="achievement != null">
-              <figure class="image is16by9">
-                <img [src]="achievement.picture" alt="https://bulma.io/images/placeholders/1280x960.png">
-              </figure>
-            </div>
-            <h2><i class="fas fa-arrows-alt-v"></i> {{achievement.name}} </h2>
-            <p>
-              {{achievement.description}}
-            </p>
-          </div>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="e.g Tetris" #gameName>
         </div>
-      </section>
-      <h1 *ngIf="achievVet.length <= 0">No achievements available.</h1>
+      </div>
+
+      <div class="field">
+        <label class="label">Genre</label>
+        <div class="control">
+          <input class="input" type="email" placeholder="e.g. Puzzle" #gameGenre>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Cover Image URL</label>
+        <div class="control">
+          <input class="input" type="email" placeholder="e.g. someurl.com/somepic" #gameImg>
+        </div>
+      </div>
     </section>
+    <!-- Content ... -->
     <footer class="modal-card-foot">
-      <button class="button is-success">Add Achievement</button>
+      <button class="button is-link" (click)="formSubmit(gameName.value, gameGenre.value, gameImg.value, editModal)">
+        Confirm
+      </button>
+      <button class="button is-link is-light" (click)="toggleModal(editModal)">Cancel</button>
     </footer>
   </div>
 </div>

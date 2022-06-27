@@ -42,3 +42,10 @@ export interface Achievement{
   description: String;
   picture: String;
 }
+
+export interface GameUpdateObj{
+  id: Number;
+  name: String;
+  genre: String;
+  cover_image: String;
+}

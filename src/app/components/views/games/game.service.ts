@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Achievement, Game, GamePage } from './games.model';
+import { Achievement, Game, GamePage, GameUpdateObj } from './games.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +32,10 @@ export class GameService {
   addAchievementToGame(gameId: Number, achievementArray: Achievement[]): Observable<void>{
     const url = `${this.baseUrl}/games/${gameId}/achievements/add`;
     return this.http.put<void>(url,achievementArray);
+  }
+
+  updateGame(newObj: GameUpdateObj): Observable<void>{
+    const url = `${this.baseUrl}/games/${newObj.id}`;
+    return this.http.put<void>(url, newObj);
   }
 }
