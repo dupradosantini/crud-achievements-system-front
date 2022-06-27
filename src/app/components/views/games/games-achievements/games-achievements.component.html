@@ -1,10 +1,10 @@
 <div class="hero is-fullheight is-dark has-background">
   <img src="/assets/img/home-bg.jpg" alt="" class="hero-background is-transparent">
-   <div class="hero-body">
-     <div class="container has-text-centered">
-       <h1 class="title">Unlockable Achievements</h1>
-       <!--  CARD  -->
-       <section class="boxes"*ngIf="achievementArray.length > 0">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">Unlockable Achievements</h1>
+      <!--  CARD  -->
+      <section class="boxes" *ngIf="achievementArray.length > 0">
         <div class="container">
           <div class="box" *ngFor="let achievement of achievementArray; let i = index;">
             <div class="card-image" *ngIf="achievement != null">
@@ -19,10 +19,15 @@
           </div>
         </div>
       </section>
-       <!-- CARD   -->
-        <section *ngIf="achievementArray.length <=0">
-          <h3> There are no achievements available for this game.</h3>
-        </section>
-      </div>
-   </div>
+      <!-- CARD   -->
+      <section *ngIf="achievementArray.length <=0">
+        <h3> There are no achievements available for this game.</h3>
+      </section>
+      <button class="button">Add Achievement</button>
+    </div>
+  </div>
 </div>
+
+<!-- ADD ACHIEV MODAL HERE-->
+
+<!-- ADD ACHIEV MODAL-->
