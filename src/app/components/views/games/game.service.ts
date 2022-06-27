@@ -28,4 +28,9 @@ export class GameService {
     const url = `${this.baseUrl}/games/${id}/achievements`;
     return this.http.get<Achievement[]>(url);
   }
+
+  addAchievementToGame(gameId: Number, achievementArray: Achievement[]): Observable<void>{
+    const url = `${this.baseUrl}/games/${gameId}/achievements/add`;
+    return this.http.put<void>(url,achievementArray);
+  }
 }
