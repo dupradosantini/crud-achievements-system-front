@@ -28,7 +28,7 @@
                 </figure>
               </div>
               <div class="buttons">
-                <button class="button is-dark">
+                <button class="button is-dark" (click)="viewAllAchievements(player, viewAllModal)">
                   <mat-icon>remove_red_eye</mat-icon>
                 </button>
                 <button class="button is-dark">
@@ -45,3 +45,36 @@
       </div>
    </div>
 </div>
+
+<!-- All achievs visualization modal -->
+<div class="modal" #viewAllModal>
+  <div class="modal-background"></div>
+  <div class="modal-content" *ngIf="selectedPlayer != null">
+    <!-- Any other Bulma elements you want -->
+    <div class="title" *ngIf="selectedPlayer.unlockedAchievements.length <= 0">
+      This player has no achievements yet!!
+    </div>
+    <div class="card" *ngFor="let game of selectedPlayer.ownedGames">
+      <header class="card-header">
+        <p class="card-header-title">
+          {{game.name}}
+        </p>
+      </header>
+      <div class="boxes" *ngFor="let achievement of selectedPlayer.unlockedAchievements">
+        <div class="box" *ngIf="achievement.gameId === game.id">
+          <div class="card-image" *ngIf="achievement != null">
+            <figure class="image">
+              <img [src]="achievement.picture" alt="https://bulma.io/images/placeholders/1280x960.png">
+            </figure>
+        </div>
+        <div class="achiev-text">
+          <h2><i class="fas fa-arrows-alt-v"></i>{{achievement.name}}</h2>
+          <p> {{achievement.description}} </p>
+        </div>
+      </div>
+    </div>
+    <!-- Any other Bulma elements you want -->
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="toggleModal(viewAllModal)"></button>
+</div>
+<!-- All achievs visualization modal -->

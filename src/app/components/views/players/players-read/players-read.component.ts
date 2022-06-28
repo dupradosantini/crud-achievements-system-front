@@ -1,6 +1,4 @@
-import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { PlayerService } from '../player.service';
 import { Achievement, Player, PlayerPage } from '../players.model';
 
@@ -21,6 +19,7 @@ export class PlayersReadComponent implements OnInit {
   numberOfElements: Number;
   totalPages:Number;
   lastScrollPosition: number;
+  selectedPlayer: any;
 
   constructor(private service: PlayerService) {
     this.pageNumber=DEFAULT_PAGE_NUMBER;
@@ -92,7 +91,7 @@ export class PlayersReadComponent implements OnInit {
           for(let i = 0; i<this.playerPage.content.length; i++){
             this.playerArray.push(this.playerPage.content[i]);
           }
-          console.log(this.numberOfElements)
+          //console.log(this.numberOfElements)
           if(this.numberOfElements == (this.totalPages.valueOf() * DEFAULT_PAGE_SIZE) - 1){
             this.getLastPlayer();
           }
@@ -103,9 +102,17 @@ export class PlayersReadComponent implements OnInit {
 
   async getLastPlayer(){
     setTimeout(() => { //Reminder : this gets executed after the 300 ms delay.
-        //this.numberOfElements = DEFAULT_PAGE_SIZE * this.totalPages.valueOf();
         this.numberOfElements = this.numberOfElements.valueOf() + 1;
         this.getMoreElements();
     }, 80);
+  }
+
+  toggleModal(modal: any){
+    modal.classList.toggle('is-active');
+  }
+
+  viewAllAchievements(player: Player, modal: any){
+    this.selectedPlayer = player;
+    this.toggleModal(modal);
   }
 }
