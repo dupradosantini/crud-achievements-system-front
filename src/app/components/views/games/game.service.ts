@@ -38,4 +38,9 @@ export class GameService {
     const url = `${this.baseUrl}/games/${newObj.id}`;
     return this.http.put<void>(url, newObj);
   }
+
+  createGame(newObj: GameUpdateObj): Observable<void>{
+    const url = `${this.baseUrl}/games`;
+    return this.http.post<void>(url,newObj);
+  }
 }

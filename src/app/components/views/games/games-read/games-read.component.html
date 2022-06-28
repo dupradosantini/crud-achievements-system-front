@@ -2,7 +2,32 @@
   <img src="/assets/img/home-bg.jpg" alt="" class="hero-background is-transparent">
    <div class="hero-body">
      <div class="container has-text-centered">
-       <h1 class="title"> Available Games </h1>
+      <!-- Add game button-->
+      <nav class="level">
+        <div class="level-left">
+          <div class="notification is-link" *ngIf="editSuccess === true">
+            <button class="delete" (click)="closeNotification()"></button>
+            Success!
+          </div>
+          <div class="notification is-danger" *ngIf="editFail === true">
+            <button class="delete" (click)="closeNotification()"></button>
+            Oops... Something went wrong.
+          </div>
+        </div>
+        <p class="level-item has-text-centered">
+          <!--fodder html that makes the button behave as wanted-->
+        </p>
+        <div class="level-right">
+          <p class="level-item">
+            <button class="button is-link" (click)="createGame(editModal,gameName,gameGenre,gameImg)">
+              Register a New Game
+            </button>
+          </p>
+        </div>
+      </nav>
+
+      <!-- Add game button-->
+      <h1 class="title"> Available Games </h1>
        <!--  CARD  -->
       <section class="boxes"*ngIf="gameVet.length > 0">
         <div class="container">
@@ -53,12 +78,13 @@
  </div>
 
 
- <!-- MODAL TO SHOWCASE ACHIEVEMENTS-->
+ <!-- MODAL TO EDIT/CREATE GAME -->
  <div class="modal is-dark" #editModal>
   <div class="modal-background is-dark"></div>
   <div class="modal-card is-dark">
     <header class="modal-card-head is-dark">
-      <p class="modal-card-title">Edit Game</p>
+      <p class="modal-card-title" *ngIf="isEdit === true;">Edit Game</p>
+      <p class="modal-card-title" *ngIf="isEdit === false;">Add Game</p>
       <button class="delete" aria-label="close" (click)="toggleModal(editModal)"></button>
     </header>
     <section class="modal-card-body">
@@ -86,11 +112,20 @@
     </section>
     <!-- Content ... -->
     <footer class="modal-card-foot">
-      <button class="button is-link" (click)="formSubmit(gameName.value, gameGenre.value, gameImg.value, editModal)">
-        Confirm
+      <button class="button is-link"
+      (click)="editSubmit(gameName.value, gameGenre.value, gameImg.value, editModal)"
+      *ngIf="isEdit === true">
+        Confirm Edit
+      </button>
+      <button class="button is-link"
+      (click)="createSubmit(gameName.value, gameGenre.value, gameImg.value, editModal)"
+      *ngIf="isEdit === false">
+        Register!
       </button>
       <button class="button is-link is-light" (click)="toggleModal(editModal)">Cancel</button>
     </footer>
   </div>
 </div>
- <!-- MODAL TO SHOWCASE ACHIEVEMENTS-->
+ <!-- MODAL TO EDIT/CREATE GAME-->
+
+

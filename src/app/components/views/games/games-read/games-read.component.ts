@@ -19,11 +19,17 @@ export class GamesReadComponent implements OnInit {
   numberOfElements:Number;
   totalPages:Number;
   selectedGame: any;
+  isEdit: boolean;
+  editSuccess: boolean;
+  editFail:boolean;
 
   constructor(private service: GameService, private router: Router) {
     this.pageNumber=DEFAULT_PAGE_NUMBER;
     this.numberOfElements=DEFAULT_PAGE_SIZE;
     this.totalPages=0;
+    this.isEdit=false;
+    this.editSuccess=false;
+    this.editFail=false;
    }
 
   ngOnInit(): void {
@@ -72,6 +78,7 @@ export class GamesReadComponent implements OnInit {
   }
 
   editGame(id: Number, modal: any, nameInput: any, genreInput: any, coverImgInput: any){
+    this.isEdit=true;
     this.service.findGameById(id)
     .subscribe(response =>{
       this.selectedGame = response;
@@ -82,7 +89,7 @@ export class GamesReadComponent implements OnInit {
     })
   }
 
-  formSubmit(gameName: string, gameGenre: string, gameImg: string, modal: any){
+  editSubmit(gameName: string, gameGenre: string, gameImg: string, modal: any){
     const placeholderGame: GameUpdateObj = {
       id: this.selectedGame.id,
       name: gameName,
@@ -93,15 +100,37 @@ export class GamesReadComponent implements OnInit {
     this.service.updateGame(placeholderGame)
     .subscribe({
       next: (response) => {
-        this.toggleModal(modal);
-        this.getGamePage();
-        console.log('Game Updated!');
-        console.log(response);
+        this.successRequest(modal,response);
       },
       error: () => {
-        this.toggleModal(modal);
-        console.log("Error updating")
+        this.failedRequest(modal);
       }
+    })
+  }
+
+  createGame(modal: any, nameInput: any, genreInput: any, coverImgInput: any){
+    this.isEdit=false;
+    nameInput.value = "";
+    genreInput.value = "";
+    coverImgInput.value = "";
+    this.toggleModal(modal);
+  }
+
+  createSubmit(gameName: string, gameGenre: string, gameImg: string, modal: any){
+    const placeholderGame: GameUpdateObj = {
+      id: 0,
+      name: gameName,
+      genre: gameGenre,
+      cover_image: gameImg
+    }
+    console.log(placeholderGame);
+    //call for post service
+    this.service.createGame(placeholderGame)
+    .subscribe({
+      next: (response) => {
+        this.successRequest(modal,response);
+      },
+      error: () => this.failedRequest(modal)
     })
   }
 
@@ -114,4 +143,32 @@ export class GamesReadComponent implements OnInit {
     const pageName = `games/${id}/achievements`;
     this.router.navigate([`${pageName}`]);
   }
+
+  closeNotification(){
+    this.editSuccess=false;
+    this.editFail=false;
+  }
+
+  successRequest(modal: any, response:any){
+    this.toggleModal(modal);
+    this.getGamePage();
+    if(this.isEdit===true){
+      console.log("Update Successful");
+    }else{
+      console.log("Create Successfull");
+    }
+    this.editSuccess=true;
+    console.log(response);
+  }
+
+  failedRequest(modal: any){
+    this.toggleModal(modal);
+    if(this.isEdit===true){
+      console.log("Update Failed");
+    }else{
+      console.log("Create Failed");
+    }
+    this.editFail=true;
+  }
+
 }
