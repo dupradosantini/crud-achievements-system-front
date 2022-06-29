@@ -17,4 +17,18 @@ export class HeaderComponent implements OnInit {
     navBurger.classList.toggle('is-active');
     navMenu.classList.toggle('is-active');
   }
+
+  share(){
+    const shareData = {
+      title: 'Achievement Tracker',
+      text: "Track your games's achievements progress with this app!",
+      url: 'https://github.com/stars/dupradosantini/lists/opus-challenge'
+    };
+    try {
+      navigator.share(shareData);
+      console.log('Shared successfully');
+    } catch(err) {
+      console.log('Error: ' + err);
+    }
+  }
 }
