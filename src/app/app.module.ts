@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,8 @@ import { PlayersReadComponent } from './components/views/players/players-read/pl
 //Infinite Scroll
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { GamesAchievementsComponent } from './components/views/games/games-achievements/games-achievements.component';
+import { LoginComponent } from './components/login/login.component';
+import { JwtInterceptor } from './components/shared/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { GamesAchievementsComponent } from './components/views/games/games-achie
     HomeComponent,
     GamesReadComponent,
     PlayersReadComponent,
-    GamesAchievementsComponent
+    GamesAchievementsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +45,11 @@ import { GamesAchievementsComponent } from './components/views/games/games-achie
     MatIconModule,
     MatCardModule,
     HttpClientModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

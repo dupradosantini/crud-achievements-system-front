@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -7,15 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  userLoggedIn: Boolean;
+
+  constructor(private authenticationService: AuthenticationService) {
+    this.userLoggedIn = this.isLoggedIn();
+  }
 
   ngOnInit(): void {
+    //this.userLoggedIn = this.isLoggedIn();
   }
 
   toggleButton(navBurger: any, navMenu: any){
     console.log(navBurger);
     navBurger.classList.toggle('is-active');
     navMenu.classList.toggle('is-active');
+  }
+
+  isLoggedIn() :Boolean {
+   return this.authenticationService.currentUserValue? true : false;
+  }
+
+  navLogout(){
+    this.authenticationService.logout();
   }
 
   share(){
