@@ -1,0 +1,40 @@
+.hero
+  &.has-background
+    position: relative
+    overflow: hidden
+  &-background
+    position: absolute
+    object-fit: cover
+    object-position: center center
+    width: 100%
+    height: 100%
+    &.is-transparent
+      opacity: 0.3
+
+.hero-body
+  .container
+    .card-is-dark
+      margin-left: 36.5%
+      margin-right: 36%
+      .card-header
+        .card-header-title
+          color: white
+          padding: 30px
+          font-size: 30px
+      .card-content
+        .content
+          .field
+            .label
+              color: white
+              font-size: 20px
+            .control
+              .input
+                background: hsl(0, 0, 15%)
+                color: white
+      .card-footer
+        .button
+          width: 48%
+          margin: 2%
+
+
+

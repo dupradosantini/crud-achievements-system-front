@@ -52,4 +52,12 @@ export class AuthenticationService {
   getUserName(){
     return JSON.parse(localStorage.getItem('username') || '{}');
   }
+
+  signUp(name:string, email:string, password:string){
+
+    return this.http.post<any>(
+      `${environment.baseUrl}/players`,
+      {name, email, password},
+      { observe: "response"});
+  }
 }

@@ -5,11 +5,17 @@
        <div class="card-is-dark">
          <header class="card-header">
            <p class="card-header-title">
-             Fill in your credentials
+             Create your Account
            </p>
          </header>
          <div class="card-content">
            <div class="content">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" type="text" #name>
+              </div>
+            </div>
              <div class="field">
                <label class="label">Email</label>
                <div class="control">
@@ -25,11 +31,10 @@
            </div>
          </div>
          <footer class="card-footer">
-           <button class="button is-dark" (click)="submitLogin(email.value, password.value)">Login</button>
-           <button class="button is-dark" (click)="sendToSignUp()">Register</button>
+           <button class="button is-dark" (click)="registerAccount(name.value, email.value, password.value)">Sign Up</button>
+           <button class="button is-dark" (click)="backToLogin()">Back to Login</button>
          </footer>
        </div>
      </div>
    </div>
  </div>
-

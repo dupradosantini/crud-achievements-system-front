@@ -29,6 +29,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  sendToSignUp(){
+    this.router.navigate(['/signup']);
+  }
+
   submitLogin(email: string, password: string): void{
     this.authenticationService.login(email,password)
     .pipe(first())

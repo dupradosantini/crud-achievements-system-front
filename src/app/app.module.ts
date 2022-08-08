@@ -24,6 +24,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { GamesAchievementsComponent } from './components/views/games/games-achievements/games-achievements.component';
 import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptor } from './components/shared/jwt.interceptor';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { JwtInterceptor } from './components/shared/jwt.interceptor';
     GamesReadComponent,
     PlayersReadComponent,
     GamesAchievementsComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

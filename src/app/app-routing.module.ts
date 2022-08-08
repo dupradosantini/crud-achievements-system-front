@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/shared/auth.guard';
+import { SignupComponent } from './components/signup/signup.component';
 import { GamesAchievementsComponent } from './components/views/games/games-achievements/games-achievements.component';
 import { GamesReadComponent } from './components/views/games/games-read/games-read.component';
 import { HomeComponent } from './components/views/home/home.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path:"login",
     component: LoginComponent
+  },
+  {
+    path:"signup",
+    component: SignupComponent
   }
 ];
 
