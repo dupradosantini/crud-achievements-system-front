@@ -3,7 +3,7 @@ import { GameService } from '../game.service';
 import { Game, GameUpdateObj } from '../games.model';
 import { Router } from '@angular/router';
 
-const DEFAULT_PAGE_NUMBER = 0;
+const DEFAULT_PAGE_NUMBER = 3;
 const DEFAULT_PAGE_SIZE = 2;
 
 @Component({

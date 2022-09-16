@@ -43,8 +43,10 @@ export class PlayersReadComponent implements OnInit {
   }
 
   getRandomAchievements(achivements: Achievement[]): Achievement[]{
+    console.log("Getting Random achievements from:")
+    console.log(achivements);
     let newAchievArray:Achievement[] = [];
-    if(achivements.length > 0){
+    /*if(achivements.length > 0){
       const numbers = [];
       const slice = 4;
       let n,p;
@@ -57,6 +59,14 @@ export class PlayersReadComponent implements OnInit {
             newAchievArray[i] = achivements[n];
           }
         }while(p);
+      }
+      return newAchievArray;
+    }else{
+      return newAchievArray;
+    }*/
+    if(achivements.length>0){
+      for(let i = 0; i<achivements.length && i<4; i++){
+        newAchievArray[i] = achivements[i];
       }
       return newAchievArray;
     }else{
